@@ -1,4 +1,4 @@
-cask "intellij-idea-ultimate-2025" do
+cask "intellij-idea@2025.3" do
   version "2025.3"
   sha256 :no_check   # 先跳过校验，能跑起来再说
 
