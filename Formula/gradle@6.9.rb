@@ -5,13 +5,6 @@ class GradleAT69 < Formula
   sha256 "5d234488d2cac2ed556dc3c47096e189ad76a63cf304ebf124f756498922cf16"
   license "Apache-2.0"
 
-  livecheck do
-    url "https://services.gradle.org/distributions/"
-    regex(/href=.*?gradle[._-]v?(\d+(?:\.\d+)+)-all\.(?:[tz])/i)
-  end
-
-  bottle :unneeded
-
   # gradle currently does not support Java 16
   if Hardware::CPU.arm?
     depends_on "openjdk@11"
@@ -22,6 +15,7 @@ class GradleAT69 < Formula
   def install
     rm_f Dir["bin/*.bat"]
     libexec.install %w[bin docs lib src]
+
     env = if Hardware::CPU.arm?
       Language::Java.overridable_java_home_env("11")
     else
@@ -32,7 +26,6 @@ class GradleAT69 < Formula
 
   test do
     assert_match version.to_s, shell_output("#{bin}/gradle --version")
-
     (testpath/"settings.gradle").write ""
     (testpath/"build.gradle").write <<~EOS
       println "gradle works!"
