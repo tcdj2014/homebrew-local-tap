@@ -1,4 +1,4 @@
-cask "android-studio" do
+cask "android-studio@2025.3.2.6" do
   arch arm: "mac_arm", intel: "mac"
 
   version "2025.3.2.6,panda2"
